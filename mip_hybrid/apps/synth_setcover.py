@@ -350,6 +350,7 @@ def polish_solution(x_int, A, c, polish_time=1.0, polish_pool=0.3, x_frac=None):
         with gp.Env(empty=True) as env:
             env.setParam('OutputFlag', 0)
             env.setParam('TimeLimit', polish_time)
+            env.setParam('Threads', 1)
             env.start()
             
             with gp.Model(env=env) as model:
@@ -385,7 +386,7 @@ def polish_solution(x_int, A, c, polish_time=1.0, polish_pool=0.3, x_frac=None):
                     elapsed = time.time() - t0
                     improvement = (c @ x_int) - cost_polished
                     if improvement > 0.01:
-                        print(f"[polish] Improved: {c @ x_int:.2f} → {cost_polished:.2f} (-{improvement:.2f}, {elapsed:.3f}s)")
+                        print(f"[polish] Improved: {c @ x_int:.2f} -> {cost_polished:.2f} (-{improvement:.2f}, {elapsed:.3f}s)")
                     else:
                         print(f"[polish] No improvement ({elapsed:.3f}s)")
                     return x_polished, cost_polished, elapsed
@@ -396,6 +397,100 @@ def polish_solution(x_int, A, c, polish_time=1.0, polish_pool=0.3, x_frac=None):
     except Exception as e:
         print(f"[polish] Error: {e}")
         return x_int, float(c @ x_int), time.time() - t0
+
+
+def polish_mh(inst: SetCoverInstance, c: np.ndarray, x_init: np.ndarray,
+              tau: float, n_steps: int = 150, seed: int = None):
+    """
+    Stage 4: MH polishing with swap-repair moves.
+
+    Warm-starts from x_init (the IPF-rounded solution), so burn-in is
+    unnecessary — IPF places the solution in the right cost basin.
+    Adapted from Pub_PMIP_AOR / Step5 mh_swap_repair().
+
+    Args:
+        inst    : SetCoverInstance (uses _rows_of_col for O(1) coverage updates)
+        c       : cost vector (m,)
+        x_init  : binary warm-start solution (m,)
+        tau     : MH temperature
+        n_steps : number of MH steps (default: 150)
+        seed    : random seed
+
+    Returns:
+        (x_best, cost_best, time_taken)
+    """
+    t0 = time.time()
+    rng = np.random.default_rng(seed)
+    m, k = inst.m, inst.k
+
+    x = x_init.copy().astype(int)
+
+    # Initialise coverage counts from warm-start
+    cover_cnt = np.zeros(inst.n, dtype=int)
+    for j in range(m):
+        if x[j] == 1:
+            rows = inst._rows_of_col[j]
+            if rows.size:
+                cover_cnt[rows] += 1
+
+    E = float(c @ x)
+    x_best = x.copy()
+    E_best = E
+    acc = 0
+
+    for _ in range(n_steps):
+        j = int(rng.integers(m))
+        x_new = x.copy()
+        cover_new = cover_cnt.copy()
+
+        if x[j] == 1:
+            # Try removal
+            x_new[j] = 0
+            rows_j = inst._rows_of_col[j]
+            if rows_j.size:
+                cover_new[rows_j] -= 1
+
+            if np.all(cover_new >= k):
+                # Feasible drop — straight removal move
+                pass
+            else:
+                # Infeasible: repair by swapping in a covering column
+                deficit = np.where(cover_new < k)[0]
+                i_fix = int(rng.choice(deficit))
+                candidates = [jj for jj in inst.A[i_fix] if x_new[jj] == 0]
+                if not candidates:
+                    continue  # can't repair; skip move
+                j_add = int(rng.choice(candidates))
+                x_new[j_add] = 1
+                rows_add = inst._rows_of_col[j_add]
+                if rows_add.size:
+                    cover_new[rows_add] += 1
+        else:
+            # Insertion (always feasible, may increase cost)
+            x_new[j] = 1
+            rows_j = inst._rows_of_col[j]
+            if rows_j.size:
+                cover_new[rows_j] += 1
+
+        E_new = float(c @ x_new)
+        dE = E_new - E
+        if dE <= 0 or rng.random() < np.exp(-dE / max(tau, 1e-12)):
+            x, cover_cnt, E = x_new, cover_new, E_new
+            acc += 1
+            if E < E_best:
+                x_best, E_best = x.copy(), E
+
+    elapsed = time.time() - t0
+    acc_rate = acc / max(n_steps, 1)
+    improvement = float(c @ x_init) - E_best
+    if improvement > 1e-6:
+        print(f"[polish_mh] {float(c @ x_init):.2f} -> {E_best:.2f} "
+              f"(-{improvement:.2f}, acc={acc_rate:.2f}, {elapsed:.3f}s)")
+    else:
+        print(f"[polish_mh] No improvement (acc={acc_rate:.2f}, {elapsed:.3f}s)")
+
+    return x_best, E_best, elapsed
+
 
 def solve_mip(A, c, timelimit_s=30, gurobi_time_limit=None, gurobi_gap_limit=None, track_gurobi_anytime=False):
     """
@@ -553,64 +648,88 @@ def solve_mip(A, c, timelimit_s=30, gurobi_time_limit=None, gurobi_gap_limit=Non
 
 
 def solve_entropy_setcover(A_matrix, c, tau=0.1, iters=50, tol=1e-3, tau_schedule=None,
-                          polish_time=1.0, polish_pool=0.3):
+                          polish_time=1.0, polish_pool=0.3,
+                          do_polish_mh=False, mh_tau=None, mh_steps=150, mh_seed=None):
     """
-    Main entropy solver with optional polish refinement.
+    Main entropy solver: Stage 1 (IPF) → Stage 2/3 (rounding+drop-fix)
+    → Stage 3b (Gurobi restricted-MIP polish, optional)
+    → Stage 4 (MH polish, optional).
+
+    Ablation flags:
+        polish_time=0,  do_polish_mh=False  →  Stages 1-3  (IPF + rounding)
+        polish_time>0,  do_polish_mh=False  →  Stages 1-3b (+ Gurobi polish)
+        polish_time>0,  do_polish_mh=True   →  Stages 1-4  (+ MH polish)
     """
     inst = _build_instance_from_matrix(A_matrix, c)
-    
+
     # Parse tau schedule if provided
     taus = None
     if tau_schedule:
         try:
             taus = [float(t.strip()) for t in tau_schedule.split(",")]
-        except:
+        except Exception:
             taus = None
-    
-    # Entropy relaxation with annealing
+
+    # Stage 1: entropy relaxation (IPF with optional annealing)
     x_frac, y, smooth_obj, t_relax, lin_cost, cov_min, cov_avg = entropy_relax_with_annealing(
         inst, tau=tau, iters=iters, tol=tol, tau_schedule=taus
     )
-    
-    # Dual-guided rounding
+
+    # Stages 2-3: dual-guided rounding + drop-fix pruning
     x_int, cost, cov_min_int, feasible = round_cover_dual_guided(inst, x_frac, y)
-    
-    # Polish if requested
+
     total_time = t_relax
+
+    # Stage 3b: Gurobi restricted-MIP polish (optional)
     if polish_time > 0 and feasible:
         x_int, cost, t_polish = polish_solution(
-            x_int, A_matrix, c, 
-            polish_time=polish_time, 
+            x_int, A_matrix, c,
+            polish_time=polish_time,
             polish_pool=polish_pool,
-            x_frac=x_frac  # Use fractional solution to guide variable selection
+            x_frac=x_frac
         )
         total_time += t_polish
-    
-    return x_int, cost, feasible, total_time  # Note: total_time now includes polish
+
+    # Stage 4: MH polish (optional) — warm-starts from rounded/polished solution
+    if do_polish_mh and feasible:
+        _mh_tau = mh_tau if mh_tau is not None else (taus[-1] if taus else tau)
+        x_int, cost, t_mh = polish_mh(
+            inst, c, x_int,
+            tau=_mh_tau, n_steps=mh_steps, seed=mh_seed
+        )
+        total_time += t_mh
+
+    return x_int, cost, feasible, total_time
 
 def run_family(scales, trials, out_path, tau=0.1, density=0.002, seed=42,
-               with_mip=False, mip_timelimit=30, tau_schedule=None, iters=50, tol=1e-3):
+               with_mip=False, mip_timelimit=30, tau_schedule=None, iters=50, tol=1e-3,
+               polish_time=1.0, polish_pool=0.3,
+               do_polish_mh=False, mh_tau=None, mh_steps=150):
     """Updated to use entropy framework with anytime tracking"""
     rows = []
     t0 = time.time()
-    
+
     print(f"[synth] Using entropy framework: tau={tau}, iters={iters}, tol={tol}")
     if tau_schedule:
         print(f"[synth] Tau schedule: {tau_schedule}")
-    
+    print(f"[synth] polish_time={polish_time}, do_polish_mh={do_polish_mh}, mh_steps={mh_steps}")
+
     for (n, m) in scales:
         for t in range(trials):
             s = (seed + t) % (2**32 - 1)
             A, cost = _gen_entropy_friendly_scp(n, m, seed=s)
-            
+
             # Initialize anytime log for this trial
             anytime_log = []
             trial_start = time.time()
-            
+
             # Use entropy solver instead of greedy
             t1 = time.time()
             x, hyb_obj, feas, t_relax = solve_entropy_setcover(
-                A, cost, tau=tau, iters=iters, tol=tol, tau_schedule=tau_schedule
+                A, cost, tau=tau, iters=iters, tol=tol, tau_schedule=tau_schedule,
+                polish_time=polish_time, polish_pool=polish_pool,
+                do_polish_mh=do_polish_mh, mh_tau=mh_tau, mh_steps=mh_steps,
+                mh_seed=s
             )
             t2 = time.time()
             hyb_time = (t2 - t1)
@@ -901,7 +1020,7 @@ def run_warmstart_comparison(scales, trials, out_path, tau=0.1, seed=42,
             
             print(f"  Gurobi-warm: obj={warm_obj:.1f}, time={warm_time:.3f}s")
             if improvement_time is not None:
-                print(f"    → Improved on Hybrid at {improvement_time:.3f}s")
+                print(f"    -> Improved on Hybrid at {improvement_time:.3f}s")
             
             # Calculate metrics
             hybrid_vs_cold = ((hyb_obj - cold_obj) / max(1e-9, abs(cold_obj))) * 100
@@ -948,9 +1067,18 @@ def main():
     p.add_argument("--mip_timelimit", type=float, default=30.0)
     p.add_argument("--solver", choices=["cbc", "gurobi"], default="cbc",
                    help="MIP solver backend (default: cbc)")
+    p.add_argument("--polish_time", type=float, default=1.0,
+                   help="Gurobi restricted-MIP polish time limit (0 = disable, default: 1.0)")
+    p.add_argument("--polish_pool", type=float, default=0.3)
+    p.add_argument("--polish_mh", action="store_true",
+                   help="Enable Stage 4 MH polish (default: off)")
+    p.add_argument("--mh_tau", type=float, default=None,
+                   help="MH temperature (default: final annealing tau)")
+    p.add_argument("--mh_steps", type=int, default=150,
+                   help="Number of MH steps for Stage 4 (default: 150)")
 
     args = p.parse_args()
-    
+
     global _SELECTED_SOLVER
     _os.environ["MIP_SOLVER"] = args.solver
     _SELECTED_SOLVER = args.solver.lower()
@@ -960,7 +1088,9 @@ def main():
                tau=args.tau, tau_schedule=args.tau_schedule,
                iters=args.iters, tol=args.tol,
                density=args.density, seed=args.seed,
-               with_mip=args.with_mip, mip_timelimit=args.mip_timelimit)
+               with_mip=args.with_mip, mip_timelimit=args.mip_timelimit,
+               polish_time=args.polish_time, polish_pool=args.polish_pool,
+               do_polish_mh=args.polish_mh, mh_tau=args.mh_tau, mh_steps=args.mh_steps)
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,37 @@
+
+MIPFocus comparison summary — 20260405_1344
+Scales: [(100, 500), (200, 1000), (400, 2000)]  trials=5  seed=42
+Gap computed vs Gurobi-MIPFocus1 @ 30s (best-known reference)
+
+--- 100x500 ---
+  Method                   Budget   gap med%   gap P95%    obj med  time med  1st-sol med
+  ---------------------------------------------------------------------------------------
+  RICH Stage 1-4              ~1s       4.00       7.48      15.29     0.112          n/a
+  Gurobi-default               1s       0.00       0.00      14.53     0.556        0.003
+  Gurobi-default               5s       0.00       0.00      14.53     0.403        0.003
+  Gurobi-default              30s       0.00       0.00      14.53     0.334        0.003
+  Gurobi-MIPFocus1             1s       0.00       0.00      14.53     0.318        0.003
+  Gurobi-MIPFocus1             5s       0.00       0.00      14.53     0.393        0.003
+  Gurobi-MIPFocus1            30s       0.00       0.00      14.53     0.335        0.003
+
+--- 200x1000 ---
+  Method                   Budget   gap med%   gap P95%    obj med  time med  1st-sol med
+  ---------------------------------------------------------------------------------------
+  RICH Stage 1-4              ~1s       3.68       4.46      19.83     1.046          n/a
+  Gurobi-default               1s       4.84       5.93      19.62     1.029        0.003
+  Gurobi-default               5s       2.24       2.88      19.39     5.022        0.003
+  Gurobi-default              30s       0.05       0.82      19.11    30.026        0.003
+  Gurobi-MIPFocus1             1s       5.89       6.52      19.89     1.028        0.002
+  Gurobi-MIPFocus1             5s       1.43       2.04      19.19     5.026        0.003
+  Gurobi-MIPFocus1            30s       0.00       0.00      19.13    30.019        0.003
+
+--- 400x2000 ---
+  Method                   Budget   gap med%   gap P95%    obj med  time med  1st-sol med
+  ---------------------------------------------------------------------------------------
+  RICH Stage 1-4              ~1s       6.69      10.49      26.93     1.051          n/a
+  Gurobi-default               1s       9.06      10.13      27.14     1.025        0.002
+  Gurobi-default               5s       5.24       6.75      26.02     5.032        0.002
+  Gurobi-default              30s       1.61       3.44      24.98    30.023        0.002
+  Gurobi-MIPFocus1             1s      10.73      17.66      27.22     1.026        0.002
+  Gurobi-MIPFocus1             5s       1.84       6.42      25.88     5.022        0.002
+  Gurobi-MIPFocus1            30s       0.00       0.00      24.58    30.023        0.002

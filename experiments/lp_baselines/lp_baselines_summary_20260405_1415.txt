@@ -1,0 +1,17 @@
+
+LP baseline summary -- 20260405_1415
+Threads=1 for both RICH rounding and Gurobi-LP; RICH uses IPF/Sinkhorn warm-start
+
+Population synthesis (matching row/col marginals exactly):
+          Size   RICH med(s)   LP med(s)   Speedup
+  --------------------------------------------------
+  80x80 N=   51200        0.0461      0.0459      1.0x
+  120x120 N=  115200        0.0769      0.0775      1.0x
+  160x160 N=  204800        0.1245      0.1246      1.0x
+
+Transportation (min-cost, gap vs LP = 0% by TU):
+        Size   RICH med(s)   LP med(s)   Speedup
+  ------------------------------------------------
+  50x50 N=  5000        0.0310      0.0308      1.0x
+  100x100 N= 20000        0.0458      0.0468      1.0x
+  200x200 N= 80000        0.1544      0.1392      0.9x

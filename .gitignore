@@ -2,39 +2,37 @@
 __pycache__/
 *.py[cod]
 *.pyo
-*.pyd
-.Python
-*.egg-info/
-dist/
-build/
 .eggs/
-*.egg
-.venv/
-venv/
-env/
+*.egg-info/
 
-# Gurobi licence / env
-gurobi.env
-*.lic
+# Gurobi
+gurobi.log
+*.lp
+*.mps
 
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb
+# Experiment outputs — keep only summary TXTs, not raw CSVs
+experiments/**/*.csv
+experiments/**/output/
 
-# R
-.Rhistory
-.RData
+# Old rail experiments (pre-submission)
+experiments/rail/
 
-# OS
+# Data files (large; downloaded separately)
+data/*.csv
+data/*.pkl
+data/*.json
+data/orlib_scp/*.txt
+
+# OS / IDE
 .DS_Store
 Thumbs.db
-
-# IDE
-.idea/
+.Rhistory
 .vscode/
-*.swp
-*.swo
+.idea/
+*.spyproject
 
-# Large experiment outputs (keep CSVs, skip big binaries)
-*.pkl
+# Build artefacts and large binaries
 output/
+*.zip
+*.pdf
+*.pkl
