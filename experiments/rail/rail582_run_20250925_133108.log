@@ -1,0 +1,6 @@
+[runner] Using RAIL582 set cover app with path: C:\Users\rich\OneDrive - Danmarks Tekniske Universitet\JR\Publikationer\MIP hybrid\rail582
+[DEBUG] main_from_cli_namespace called with: gurobi_time_limit=None, gurobi_gap_limit=None, track_gurobi_anytime=False
+[mode] RUN_MODE=auto | rail_path='C:\\Users\\rich\\OneDrive - Danmarks Tekniske Universitet\\JR\\Publikationer\\MIP hybrid\\rail582\\rail582' | threads=1 | mip_gap=0.01
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=None, gurobi_gap_limit=None, track_anytime=True

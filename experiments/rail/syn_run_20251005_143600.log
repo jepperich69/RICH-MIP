@@ -1,0 +1,325 @@
+[runner] Using synthetic set cover generator
+[DEBUG] scales parameter: 200x4000,300x6000
+[DEBUG] trials parameter: 20
+[synth] Using entropy framework: tau=0.1, iters=200, tol=0.001
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 43
+[200x4000, t=0] HYB=16.1 vs MIP=15.5 (gap=4.0%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 49
+[200x4000, t=1] HYB=16.1 vs MIP=15.1 (gap=6.6%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 50
+[200x4000, t=2] HYB=16.2 vs MIP=15.7 (gap=3.6%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 41
+[200x4000, t=3] HYB=15.9 vs MIP=15.5 (gap=3.0%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 60
+[200x4000, t=4] HYB=16.6 vs MIP=15.3 (gap=8.4%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 52
+[200x4000, t=5] HYB=15.7 vs MIP=14.5 (gap=8.0%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 52
+[200x4000, t=6] HYB=13.3 vs MIP=12.9 (gap=2.8%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 57
+[200x4000, t=7] HYB=15.6 vs MIP=14.7 (gap=6.6%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 42
+[200x4000, t=8] HYB=15.8 vs MIP=14.7 (gap=7.4%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 42
+[200x4000, t=9] HYB=16.4 vs MIP=15.1 (gap=8.1%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 41
+[200x4000, t=10] HYB=15.2 vs MIP=14.8 (gap=2.8%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 46
+[200x4000, t=11] HYB=15.4 vs MIP=14.8 (gap=3.8%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 41
+[200x4000, t=12] HYB=14.2 vs MIP=13.5 (gap=5.2%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 49
+[200x4000, t=13] HYB=14.5 vs MIP=13.6 (gap=6.4%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 50
+[200x4000, t=14] HYB=14.7 vs MIP=13.9 (gap=5.1%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 32
+[200x4000, t=15] HYB=15.8 vs MIP=15.7 (gap=0.7%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 43
+[200x4000, t=16] HYB=16.4 vs MIP=15.8 (gap=3.6%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 60
+[200x4000, t=17] HYB=16.3 vs MIP=15.4 (gap=5.7%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 43
+[200x4000, t=18] HYB=13.7 vs MIP=13.7 (gap=0.2%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 45
+[200x4000, t=19] HYB=15.8 vs MIP=15.1 (gap=4.7%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 47
+[300x6000, t=0] HYB=17.1 vs MIP=17.7 (gap=-3.2%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 36
+[300x6000, t=1] HYB=18.0 vs MIP=19.2 (gap=-6.4%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 34
+[300x6000, t=2] HYB=17.9 vs MIP=19.3 (gap=-7.0%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 45
+[300x6000, t=3] HYB=18.2 vs MIP=19.9 (gap=-8.3%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 34
+[300x6000, t=4] HYB=18.6 vs MIP=20.0 (gap=-6.7%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 32
+[300x6000, t=5] HYB=18.1 vs MIP=19.3 (gap=-6.0%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 36
+[300x6000, t=6] HYB=18.6 vs MIP=18.3 (gap=1.4%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 29
+[300x6000, t=7] HYB=19.5 vs MIP=20.1 (gap=-3.2%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 27
+[300x6000, t=8] HYB=19.6 vs MIP=20.6 (gap=-5.1%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 32
+[300x6000, t=9] HYB=17.3 vs MIP=18.8 (gap=-8.1%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 38
+[300x6000, t=10] HYB=19.5 vs MIP=20.2 (gap=-3.3%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 23
+[300x6000, t=11] HYB=19.1 vs MIP=20.2 (gap=-5.2%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 43
+[300x6000, t=12] HYB=18.6 vs MIP=19.4 (gap=-3.8%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 36
+[300x6000, t=13] HYB=18.5 vs MIP=19.1 (gap=-3.4%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 42
+[300x6000, t=14] HYB=18.5 vs MIP=19.3 (gap=-4.1%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 38
+[300x6000, t=15] HYB=18.2 vs MIP=19.8 (gap=-8.2%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 34
+[300x6000, t=16] HYB=18.2 vs MIP=18.5 (gap=-1.8%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 41
+[300x6000, t=17] HYB=17.4 vs MIP=17.6 (gap=-1.1%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 49
+[300x6000, t=18] HYB=18.9 vs MIP=19.7 (gap=-3.9%)
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2711408
+Set parameter TimeLimit to value 30
+Academic license 2711408 - for non-commercial use only - registered to ri___@dtu.dk
+[DEBUG SYNTH] mip_result type: <class 'dict'>, has anytime_log: True
+[DEBUG SYNTH] anytime_log length: 46
+[300x6000, t=19] HYB=19.5 vs MIP=20.5 (gap=-4.8%)
+[synth] wrote experiments/rail\syn_results_20251005_143600.csv rows=40 wall=1243.94s

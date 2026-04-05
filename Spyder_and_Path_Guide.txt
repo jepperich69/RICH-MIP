@@ -1,0 +1,75 @@
+RICH Hybrid Solver — Spyder & Path Guide
+
+Overview
+--------
+This note explains how to run RICH from Spyder (F5) and how the project path is set in cli.py.
+
+Running from Spyder (F5)
+------------------------
+Press F5 on cli.py. If no CLI arguments are supplied, the current cli.py runs the 'warmstart' subcommand by default.
+To change that default, edit main() and replace this line (near the bottom):
+
+    args = parser.parse_args(["warmstart"]) if len(sys.argv) == 1 else parser.parse_args()
+
+Examples:
+  • Default to Rail quick run under Spyder only:
+        if "SPYDER_KERNEL_ID" in os.environ and len(sys.argv) == 1:
+            args = parser.parse_args(["rail","--quick"])
+        else:
+            args = parser.parse_args()
+
+  • Always default to suite (no detection):
+        args = parser.parse_args(["suite"]) if len(sys.argv) == 1 else parser.parse_args()
+
+Path setup in cli.py (bootstrap)
+--------------------------------
+At the top of cli.py there is a bootstrap block that sets PROJECT_ROOT and updates sys.path.
+Replace any hardcoded Windows path with the following portable finder:
+
+    # --- portable bootstrap (drop-in replacement) ---
+    import os, sys
+    from pathlib import Path
+
+    def find_project_root(start=Path(__file__).resolve()):
+        for p in [start] + list(start.parents):
+            if (p / "mip_hybrid").is_dir() or (p / "pyproject.toml").exists() or (p / ".git").exists():
+                return p
+        return start.parent  # fallback
+
+    PROJECT_ROOT = find_project_root()
+    os.chdir(PROJECT_ROOT)
+    if str(PROJECT_ROOT) not in sys.path:
+        sys.path.insert(0, str(PROJECT_ROOT))
+    # --- end portable bootstrap ---
+
+Rail582 path
+------------
+Set the Rail582 path via environment variable or CLI if not auto-detected:
+
+Windows:
+    set RAIL582_DIR=C:\path\to\rail582
+
+macOS/Linux:
+    export RAIL582_DIR=/home/user/data/rail582
+
+CLI alternative:
+    python cli.py rail --rail_dir /path/to/rail582
+
+Copy & modify the base library
+------------------------------
+To fork the core package while keeping the CLI working:
+
+    cp -r mip_hybrid my_hybrid
+
+Edit imports in cli.py:
+    from mip_hybrid.apps.synth_setcover import run_warmstart_comparison
+becomes
+    from my_hybrid.apps.synth_setcover import run_warmstart_comparison
+
+Or make it selectable by environment variable:
+    import importlib, os
+    LIB = os.getenv("HYBRID_LIB", "mip_hybrid")
+    run_warmstart_comparison = importlib.import_module(f"{LIB}.apps.synth_setcover").run_warmstart_comparison
+
+Now you can switch libraries without editing:
+    HYBRID_LIB=my_hybrid python cli.py warmstart

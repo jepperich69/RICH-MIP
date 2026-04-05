@@ -1,0 +1,4 @@
+metric,value
+total_experiments,40
+avg_hyb_time,1.813
+avg_mip_time,30.121

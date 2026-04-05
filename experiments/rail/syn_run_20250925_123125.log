@@ -1,0 +1,5 @@
+[runner] Using synthetic set cover generator
+[DEBUG] scales parameter: 200x4000,300x6000
+[DEBUG] trials parameter: 5
+[synth] Using entropy framework: tau=0.1, iters=200, tol=0.001
+[DEBUG] MIP solver: cbc, timelimit: 30.0

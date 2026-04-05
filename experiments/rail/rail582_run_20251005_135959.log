@@ -1,0 +1,13 @@
+[runner] Using RAIL582 set cover app with path: C:\Users\rich\OneDrive - Danmarks Tekniske Universitet\JR\Publikationer\MIP hybrid\rail582
+[DEBUG] main_from_cli_namespace called with: gurobi_time_limit=30.0, gurobi_gap_limit=None, track_gurobi_anytime=True
+[mode] RUN_MODE=auto | rail_path='C:\\Users\\rich\\OneDrive - Danmarks Tekniske Universitet\\JR\\Publikationer\\MIP hybrid\\rail582\\rail582' | threads=1 | mip_gap=0.01
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[SOLVE_MIP] track_anytime=True, solver=cbc, backend=ortools
+[DEBUG] mip_res keys: dict_keys(['x', 'obj', 'time', 'gap', 'status', 'backend', 'anytime_log'])
+[DEBUG] mip_res anytime_log has 0 entries
+[rail] MIP obj=212.000, gap=0.011, t=27.073s
+[rail] HYB int=334.000 (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=29.31s (relax=0.043s, Sum_stages=28.45s) | objs: relax=427.046, round=509.000, polish=334.000, mip=212.000, gap%=57.55 | times(s): relax=0.04, round_main=0.00, round_rr=0.04, improve=0.01, polish=0.69, mip=27.65, lp=0.00, redcost=0.01)
+[rail] Writing 1 rows with 32 columns to experiments/rail\rail582_results_20251005_135959.csv
+[rail] Successfully wrote experiments/rail\rail582_results_20251005_135959.csv
+[rail] wrote experiments/rail\rail582_results_20251005_135959.csv rows=1

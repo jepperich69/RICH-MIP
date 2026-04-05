@@ -1,0 +1,106 @@
+[runner] Using RAIL582 set cover app with path: C:\Users\rich\OneDrive - Danmarks Tekniske Universitet\JR\Publikationer\MIP hybrid\rail582
+[DEBUG] main_from_cli_namespace called with: gurobi_time_limit=30.0, gurobi_gap_limit=None, track_gurobi_anytime=True
+[mode] RUN_MODE=auto | rail_path='C:\\Users\\rich\\OneDrive - Danmarks Tekniske Universitet\\JR\\Publikationer\\MIP hybrid\\rail582\\rail582' | threads=1 | mip_gap=0.01
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=27.715s
+[rail] HYB int=245.000 +polish (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=29.56s (relax=0.015s, Sum_stages=28.83s) | objs: relax=427.046, round=504.000, polish=245.000, mip=211.000, gap%=16.11 | times(s): relax=0.01, round_main=0.00, round_rr=0.02, improve=0.00, polish=0.53, mip=28.27, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=29.022s
+[rail] HYB int=337.000 (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=30.09s (relax=0.014s, Sum_stages=29.86s) | objs: relax=427.046, round=533.000, polish=337.000, mip=211.000, gap%=59.72 | times(s): relax=0.01, round_main=0.00, round_rr=0.01, improve=0.00, polish=0.60, mip=29.23, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=28.539s
+[rail] HYB int=338.000 (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=30.02s (relax=0.016s, Sum_stages=29.45s) | objs: relax=427.046, round=521.000, polish=338.000, mip=211.000, gap%=60.19 | times(s): relax=0.02, round_main=0.00, round_rr=0.01, improve=0.00, polish=0.42, mip=28.99, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=29.681s
+[rail] HYB int=340.000 (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=31.05s (relax=0.045s, Sum_stages=30.69s) | objs: relax=427.046, round=509.000, polish=340.000, mip=211.000, gap%=61.14 | times(s): relax=0.04, round_main=0.00, round_rr=0.04, improve=0.02, polish=0.69, mip=29.89, lp=0.00, redcost=0.01)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=212.000, gap=0.011, t=28.086s
+[rail] HYB int=344.000 (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=30.33s (relax=0.042s, Sum_stages=29.38s) | objs: relax=427.046, round=517.000, polish=344.000, mip=212.000, gap%=62.26 | times(s): relax=0.04, round_main=0.00, round_rr=0.03, improve=0.01, polish=0.69, mip=28.61, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=27.430s
+[rail] HYB int=243.000 +polish (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=29.20s (relax=0.018s, Sum_stages=28.59s) | objs: relax=427.046, round=525.000, polish=243.000, mip=211.000, gap%=15.17 | times(s): relax=0.02, round_main=0.00, round_rr=0.01, improve=0.01, polish=0.66, mip=27.89, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=30.267s
+[rail] HYB int=329.000 (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=31.18s (relax=0.016s, Sum_stages=30.90s) | objs: relax=427.046, round=503.000, polish=329.000, mip=211.000, gap%=55.92 | times(s): relax=0.02, round_main=0.00, round_rr=0.01, improve=0.00, polish=0.42, mip=30.45, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=29.095s
+[rail] HYB int=343.000 (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=30.04s (relax=0.014s, Sum_stages=29.78s) | objs: relax=427.046, round=516.000, polish=343.000, mip=211.000, gap%=62.56 | times(s): relax=0.01, round_main=0.00, round_rr=0.01, improve=0.00, polish=0.42, mip=29.32, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=212.000, gap=0.011, t=28.567s
+[rail] HYB int=246.000 +polish (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=29.61s (relax=0.012s, Sum_stages=29.36s) | objs: relax=427.046, round=503.000, polish=246.000, mip=212.000, gap%=16.04 | times(s): relax=0.01, round_main=0.00, round_rr=0.01, improve=0.00, polish=0.53, mip=28.80, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=29.575s
+[rail] HYB int=335.000 (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=30.83s (relax=0.043s, Sum_stages=30.51s) | objs: relax=427.046, round=519.000, polish=335.000, mip=211.000, gap%=58.77 | times(s): relax=0.04, round_main=0.00, round_rr=0.04, improve=0.02, polish=0.64, mip=29.77, lp=0.00, redcost=0.01)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=27.582s
+[rail] HYB int=244.000 +polish (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=29.24s (relax=0.015s, Sum_stages=28.61s) | objs: relax=427.046, round=521.000, polish=244.000, mip=211.000, gap%=15.64 | times(s): relax=0.01, round_main=0.00, round_rr=0.01, improve=0.00, polish=0.54, mip=28.04, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=212.000, gap=0.011, t=29.961s
+[rail] HYB int=341.000 (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=31.20s (relax=0.043s, Sum_stages=30.89s) | objs: relax=427.046, round=519.000, polish=341.000, mip=212.000, gap%=60.85 | times(s): relax=0.04, round_main=0.00, round_rr=0.03, improve=0.02, polish=0.62, mip=30.17, lp=0.00, redcost=0.01)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=27.550s
+[rail] HYB int=331.000 (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=29.00s (relax=0.015s, Sum_stages=28.43s) | objs: relax=427.046, round=526.000, polish=331.000, mip=211.000, gap%=56.87 | times(s): relax=0.02, round_main=0.00, round_rr=0.02, improve=0.00, polish=0.42, mip=27.98, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=29.097s
+[rail] HYB int=240.000 +polish (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=30.17s (relax=0.015s, Sum_stages=29.88s) | objs: relax=427.046, round=480.000, polish=240.000, mip=211.000, gap%=13.74 | times(s): relax=0.01, round_main=0.00, round_rr=0.01, improve=0.00, polish=0.58, mip=29.27, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=29.030s
+[rail] HYB int=233.000 +polish (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=30.13s (relax=0.014s, Sum_stages=29.87s) | objs: relax=427.046, round=505.000, polish=233.000, mip=211.000, gap%=10.43 | times(s): relax=0.01, round_main=0.00, round_rr=0.01, improve=0.00, polish=0.62, mip=29.22, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=29.232s
+[rail] HYB int=238.000 +polish (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=30.30s (relax=0.014s, Sum_stages=30.01s) | objs: relax=427.046, round=494.000, polish=238.000, mip=211.000, gap%=12.80 | times(s): relax=0.01, round_main=0.00, round_rr=0.01, improve=0.00, polish=0.58, mip=29.40, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=28.910s
+[rail] HYB int=244.000 +polish (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=29.93s (relax=0.014s, Sum_stages=29.68s) | objs: relax=427.046, round=532.000, polish=244.000, mip=211.000, gap%=15.64 | times(s): relax=0.01, round_main=0.00, round_rr=0.01, improve=0.00, polish=0.55, mip=29.10, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=29.023s
+[rail] HYB int=334.000 (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=29.89s (relax=0.014s, Sum_stages=29.68s) | objs: relax=427.046, round=520.000, polish=334.000, mip=211.000, gap%=58.29 | times(s): relax=0.01, round_main=0.00, round_rr=0.02, improve=0.01, polish=0.40, mip=29.23, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=29.248s
+[rail] HYB int=249.000 +polish (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=30.20s (relax=0.015s, Sum_stages=29.96s) | objs: relax=427.046, round=507.000, polish=249.000, mip=211.000, gap%=18.01 | times(s): relax=0.01, round_main=0.00, round_rr=0.01, improve=0.00, polish=0.51, mip=29.42, lp=0.00, redcost=0.00)
+RAIL582: coverage per row mean=690.2, density=0.0124
+[rail] Loaded: n=582 rows, m=55515 cols, k=1
+[DEBUG] solve_mip called with: timelimit=60.0, gurobi_time_limit=30.0, gurobi_gap_limit=None, track_anytime=True
+[rail] MIP obj=211.000, gap=0.006, t=29.134s
+[rail] HYB int=341.000 (feas=OK), relax_lin=518.619, cov_min_frac=1.000, cov_min_int=1.000, T=29.99s (relax=0.014s, Sum_stages=29.74s) | objs: relax=427.046, round=522.000, polish=341.000, mip=211.000, gap%=61.61 | times(s): relax=0.01, round_main=0.00, round_rr=0.01, improve=0.00, polish=0.40, mip=29.31, lp=0.00, redcost=0.00)
+[rail] Writing 20 rows with 35 columns to experiments/rail\rail582_results_20251005_120836.csv
+[rail] Successfully wrote experiments/rail\rail582_results_20251005_120836.csv
+[rail] wrote experiments/rail\rail582_results_20251005_120836.csv rows=20

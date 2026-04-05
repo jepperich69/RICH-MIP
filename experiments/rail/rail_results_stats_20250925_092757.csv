@@ -1,0 +1,10 @@
+metric,value
+n_rows,5
+hyb_int_min,213.0
+hyb_int_avg,213.2
+mip_obj_min,211.0
+mip_obj_avg,211.0
+gap_pct_avg,1.042654028436019
+hyb_total_avg_s,54.902558780000255
+polish_time_avg_s,0.9833796977996826
+mip_time_avg_s,35.60273141860962
