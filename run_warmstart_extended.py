@@ -23,10 +23,12 @@ Outputs:
 """
 
 import sys, os, time, datetime
+from pathlib import Path
 import numpy as np
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+OVERLEAF_DIR = Path(HERE).parents[2] / "Overleaf_source"
 sys.path.insert(0, HERE)
 
 from mip_hybrid.apps.synth_setcover import (
@@ -36,15 +38,15 @@ from mip_hybrid.apps.synth_setcover import (
 OUT_DIR = os.path.join(HERE, "experiments", "warmstart_extended")
 
 # ── config ────────────────────────────────────────────────────────────────────
-# Small instances: solve to optimality (no time limit / 300s)
-SMALL_SCALES = [(50, 250), (100, 500)]
-# Large instances: 120s budget
-LARGE_SCALES = [(200, 1000), (400, 2000)]
+# Small scale: 30 s budget (Gurobi typically reaches near-optimality here)
+SMALL_SCALES = [(100, 3000)]
+# Large scales: 120 s budget (Gurobi cannot close the gap; shows primal improvement)
+LARGE_SCALES = [(200, 4000), (300, 5000)]
 
 TRIALS     = 5
 SEED       = 42
 TIME_LIMIT = 120.0   # seconds for large instances
-OPT_LIMIT  = 300.0   # seconds for small (solve to optimality attempt)
+OPT_LIMIT  =  30.0   # seconds for small instance
 
 TAU_SCHED  = "0.5,0.2,0.1"
 ITERS, TOL = 50, 1e-3
@@ -144,6 +146,73 @@ def med(vals):
     return float(np.median(v)) if v else float("nan")
 
 
+def _fmt(val, fmt=".1f", fallback="---"):
+    """Format a float; return fallback string if not finite."""
+    return format(val, fmt) if np.isfinite(val) else fallback
+
+
+# ── tex writer ────────────────────────────────────────────────────────────────
+def write_table37_tex(df, overleaf_dir=OVERLEAF_DIR):
+    """Write Table37.tex (tabular body for tab:hybrid_vs_mip) to Overleaf_source/."""
+    overleaf_dir = Path(overleaf_dir)
+    overleaf_dir.mkdir(parents=True, exist_ok=True)
+
+    all_scales = SMALL_SCALES + LARGE_SCALES
+
+    lines = [
+        r"\begin{tabular}{llrrrrrc}",
+        r"\toprule",
+        r"Scale & Configuration & Obj & Dual bound & Gap (\%) & Nodes & Time (s) & Improved \\",
+    ]
+
+    for (n, m) in all_scales:
+        sub = df[(df["n"] == n) & (df["m"] == m)]
+        rc  = sub[sub["method"] == "RICH"]
+        co  = sub[sub["method"] == "Gurobi-cold"]
+        wa  = sub[sub["method"] == "Gurobi-warm"]
+
+        lines.append(r"\midrule")
+
+        # RICH row
+        lines.append(
+            f"\\multirow{{3}}{{*}}{{${n}\\times{m}$}}"
+            f" & RICH (Stage~1--4)"
+            f" & {_fmt(med(rc['obj']))}"
+            f" & ---"
+            f" & ---"
+            f" & ---"
+            f" & {_fmt(med(rc['time']), '.2f')}"
+            f" & --- \\\\"
+        )
+        # Gurobi cold
+        lines.append(
+            f"  & Gurobi cold start"
+            f" & {_fmt(med(co['obj']))}"
+            f" & {_fmt(med(co['bound']))}"
+            f" & {_fmt(med(co['gap_pct']))}"
+            f" & {_fmt(med(co['nodes']), '.0f')}"
+            f" & {_fmt(med(co['time']), '.1f')}"
+            f" & --- \\\\"
+        )
+        # Gurobi warm
+        impr_pct = 100.0 * float(wa["improved_warm"].mean())
+        lines.append(
+            f"  & Gurobi warm start"
+            f" & {_fmt(med(wa['obj']))}"
+            f" & {_fmt(med(wa['bound']))}"
+            f" & {_fmt(med(wa['gap_pct']))}"
+            f" & {_fmt(med(wa['nodes']), '.0f')}"
+            f" & {_fmt(med(wa['time']), '.1f')}"
+            f" & {impr_pct:.0f}\\% \\\\"
+        )
+
+    lines += [r"\bottomrule", r"\end{tabular}"]
+
+    out = overleaf_dir / "Table37.tex"
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"[warmstart] Table37.tex → {out}")
+
+
 # ── main ──────────────────────────────────────────────────────────────────────
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -234,6 +303,7 @@ def main():
     with open(txt_path, "w", encoding="utf-8") as f:
         f.write(summary)
     print(f"[warmstart] Summary written to {txt_path}")
+    write_table37_tex(df)
     return df
 
 

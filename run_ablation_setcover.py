@@ -18,11 +18,13 @@ Usage (from repo root, with Gurobi env active):
 """
 
 import sys, os, time, datetime
+from pathlib import Path
 import numpy as np
 import pandas as pd
 
 # ── path setup ────────────────────────────────────────────────────────────────
 HERE = os.path.dirname(os.path.abspath(__file__))
+OVERLEAF_DIR = Path(HERE).parents[2] / "Overleaf_source"
 sys.path.insert(0, HERE)
 
 from mip_hybrid.apps.synth_setcover import (
@@ -32,7 +34,7 @@ from mip_hybrid.apps.synth_setcover import (
 )
 
 # ── experiment config ─────────────────────────────────────────────────────────
-SCALES     = [(100, 500), (200, 1000), (400, 2000)]
+SCALES     = [(100, 3000), (200, 4000), (300, 5000)]
 TRIALS     = 5
 SEED       = 42
 
@@ -164,7 +166,36 @@ def main():
         f.write(summary)
     print(f"[ablation] Summary written to {txt_path}")
 
+    write_table35_tex(df)
     return df
+
+
+def write_table35_tex(df, overleaf_dir=OVERLEAF_DIR):
+    """Write Table35.tex (tabular body for tab:ablation) to Overleaf_source/."""
+    overleaf_dir = Path(overleaf_dir)
+    overleaf_dir.mkdir(parents=True, exist_ok=True)
+
+    lines = [
+        r"\begin{tabular}{llrrr}",
+        r"\toprule",
+        r"Stages & Scale ($n \times m$) & Med.\ Gap (\%) & P95 Gap (\%) & Med.\ Time (s) \\",
+    ]
+    for stage_lbl in ["1-2", "1-3", "1-4"]:
+        lines.append(r"\midrule")
+        sub = df[df["stage"] == stage_lbl]
+        for (n, m) in SCALES:
+            g = sub[(sub["n"] == n) & (sub["m"] == m)]
+            stage_tex = stage_lbl.replace("-", "--")
+            lines.append(
+                f"{stage_tex} & ${n}\\times{m}$ & "
+                f"{med(g['gap_pct']):.2f} & {p95(g['gap_pct']):.2f} & "
+                f"{med(g['time_s']):.3f} \\\\"
+            )
+    lines += [r"\bottomrule", r"\end{tabular}"]
+
+    out = overleaf_dir / "Table35.tex"
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"[ablation] Table35.tex → {out}")
 
 
 if __name__ == "__main__":

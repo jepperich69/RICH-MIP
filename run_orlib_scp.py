@@ -14,10 +14,12 @@ Usage (from repo root, Gurobi env active):
 """
 
 import sys, os, time, datetime
+from pathlib import Path
 import numpy as np
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+OVERLEAF_DIR = Path(HERE).parents[2] / "Overleaf_source"
 sys.path.insert(0, HERE)
 
 from mip_hybrid.apps.synth_setcover import solve_entropy_setcover
@@ -273,7 +275,54 @@ def main():
         f.write(summary)
     print(f"[orlib] Summary written to {txt_path}")
 
+    write_table36_tex(df, instances)
     return df
+
+
+def write_table36_tex(df, instances, overleaf_dir=OVERLEAF_DIR):
+    """Write Table36.tex (tabular body for tab:orlib) to Overleaf_source/."""
+    overleaf_dir = Path(overleaf_dir)
+    overleaf_dir.mkdir(parents=True, exist_ok=True)
+
+    lines = [
+        r"\begin{tabular}{lrrrrrr}",
+        r"\toprule",
+        r"Instance & Opt & RICH obj & RICH gap (\%) & RICH time (s) &"
+        r" GurDef gap (\%) & GurMF1 gap (\%) \\",
+        r"\midrule",
+    ]
+    for name in instances:
+        sub  = df[df["instance"] == name]
+        if sub.empty:
+            continue
+        rich = sub[sub["method"] == "RICH-1-4"].iloc[0]
+        gd   = sub[sub["method"] == "Gurobi-default-30s"].iloc[0]
+        gm   = sub[sub["method"] == "Gurobi-MIPFocus1-30s"].iloc[0]
+        opt  = int(KNOWN_OPT[name])
+        lines.append(
+            f"{name} & {opt} & {int(rich['obj'])} & "
+            f"{rich['gap_pct']:.2f} & {rich['elapsed']:.3f} & "
+            f"{gd['gap_pct']:.2f} & {gm['gap_pct']:.2f} \\\\"
+        )
+
+    # Median row
+    rich_rows = df[df["method"] == "RICH-1-4"]
+    gd_rows   = df[df["method"] == "Gurobi-default-30s"]
+    gm_rows   = df[df["method"] == "Gurobi-MIPFocus1-30s"]
+    lines += [
+        r"\midrule",
+        f"Median & --- & {int(np.median(rich_rows['obj']))} & "
+        f"{float(np.median(rich_rows['gap_pct'])):.2f} & "
+        f"{float(np.median(rich_rows['elapsed'])):.3f} & "
+        f"{float(np.median(gd_rows['gap_pct'])):.2f} & "
+        f"{float(np.median(gm_rows['gap_pct'])):.2f} \\\\",
+        r"\bottomrule",
+        r"\end{tabular}",
+    ]
+
+    out = overleaf_dir / "Table36.tex"
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"[orlib] Table36.tex → {out}")
 
 
 if __name__ == "__main__":

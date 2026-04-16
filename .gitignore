@@ -36,3 +36,6 @@ output/
 *.zip
 *.pdf
 *.pkl
+
+# Local archive (preserved history is in git log)
+_archive_20260416/

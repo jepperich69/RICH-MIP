@@ -1,0 +1,18 @@
+
+Extended warm-start summary -- 20260416_0931
+Threads=1, small=30s, large=120s
+
+  100x3000  (budget=30s)
+    RICH         obj=   10.48  t=  0.285s
+    Gurobi-cold  obj=   10.18  bound=   10.18  gap=  0.01%  nodes=    6275
+    Gurobi-warm  obj=   10.18  bound=   10.18  gap=  0.01%  nodes=    5393  improved=100%
+
+  200x4000  (budget=120s)
+    RICH         obj=   14.50  t=  1.069s
+    Gurobi-cold  obj=   13.78  bound=   12.13  gap= 14.41%  nodes=   17213
+    Gurobi-warm  obj=   14.20  bound=   12.05  gap= 13.87%  nodes=   18343  improved=100%
+
+  300x5000  (budget=120s)
+    RICH         obj=   18.37  t=  1.133s
+    Gurobi-cold  obj=   18.46  bound=   13.86  gap= 24.93%  nodes=    5053
+    Gurobi-warm  obj=   18.09  bound=   13.86  gap= 22.26%  nodes=    4653  improved=100%
