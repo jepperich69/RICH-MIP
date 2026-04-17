@@ -19,7 +19,7 @@ import numpy as np
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OVERLEAF_DIR = Path(HERE).parents[2] / "Overleaf_source"
+OVERLEAF_DIR = Path(HERE) / "paper_artifacts"
 sys.path.insert(0, HERE)
 
 from mip_hybrid.apps.synth_setcover import solve_entropy_setcover
@@ -280,7 +280,7 @@ def main():
 
 
 def write_table36_tex(df, instances, overleaf_dir=OVERLEAF_DIR):
-    """Write Table36.tex (tabular body for tab:orlib) to Overleaf_source/."""
+    """Write Table36.tex (tabular body for tab:orlib) to paper_artifacts/."""
     overleaf_dir = Path(overleaf_dir)
     overleaf_dir.mkdir(parents=True, exist_ok=True)
 

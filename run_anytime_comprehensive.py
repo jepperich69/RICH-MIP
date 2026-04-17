@@ -233,10 +233,10 @@ def main(n_trials=N_TRIALS):
     df.to_csv(out_csv, index=False)
     print(f"\nSaved → {out_csv}  ({len(df)} rows, {len(rows)//len(CHECKPOINTS)} trials total)")
 
-    # Generate figures → Overleaf_source/
+    # Generate Figures 1 and 2 from the local CSV.
     print("\nGenerating figures ...")
     import importlib.util as _ilu
-    _fig_script = HERE.parents[2] / "make_figures_comprehensive.py"
+    _fig_script = HERE / "make_figures_comprehensive.py"
     _spec = _ilu.spec_from_file_location("make_figures_comprehensive", _fig_script)
     _fig_mod = _ilu.module_from_spec(_spec)
     _spec.loader.exec_module(_fig_mod)

@@ -1,143 +1,170 @@
-# RICH: A Rapid Information-Theoretic Hybrid Algorithm for Mixed-Integer Optimization
+# RICH-MIP Reproduction Code
 
-Companion code for the paper submitted to *Mathematical Programming Computation*.
+Companion code for the Mathematical Programming Computation manuscript on
+RICH, a Rapid Information-Theoretic Hybrid algorithm for mixed-integer
+optimization.
 
 **Author:** Jeppe Rich, Technical University of Denmark
 
----
+## What This Repository Reproduces
 
-## Overview
+This repository contains the final R1C reproduction code for the paper. The
+main entry point is `reproduce_paper.py`, which runs the numerical examples and
+reviewer-response experiments used in the revised manuscript:
 
-RICH combines entropy-regularized relaxation (solved via IPF/Sinkhorn) with
-structured integerization (KL-divergence-guided rounding) to produce guaranteed
-feasible solutions for MIPs in near-linear time.
+- LP relaxations for the population synthesis and transportation examples.
+- New anytime trajectory experiment for the large set-cover example, including
+  Figures 1 and 2.
+- Stage-contribution ablation for the four-stage RICH pipeline.
+- OR-Library scp41-scp49 benchmark comparison.
+- Gurobi default versus Gurobi `MIPFocus=1` heuristic comparison.
+- Extended warm-start experiment with 120-second budgets, dual bounds, node
+  counts, and final gap reporting.
 
-The four-stage pipeline:
-1. **Stage 1** — Entropy relaxation via IPF/Sinkhorn annealing
-2. **Stage 2** — Dual-guided rounding (MAP / dual-guided / randomized)
-3. **Stage 3** — Drop-fix (1-opt) local search + restricted-MIP polish
-4. **Stage 4** — Metropolis-Hastings local search (swap-and-repair)
+The Gurobi `MIPFocus=1` runner is still part of the reproduction package. It is
+not obsolete just because the file date is older than the final cleanup commit:
+it supports the reviewer comparison against Gurobi's built-in heuristic mode
+and is called directly by `reproduce_paper.py`.
 
----
+## Algorithm Pipeline
+
+RICH uses a four-stage hybrid pipeline:
+
+1. Entropy relaxation via IPF/Sinkhorn annealing.
+2. Dual-guided integer rounding.
+3. Drop-fix local search plus restricted-MIP polishing.
+4. Metropolis-Hastings swap-and-repair polishing.
 
 ## Requirements
 
-- Python 3.9+
-- numpy, pandas (see `requirements.txt`)
-- **Gurobi 10+ with a valid licence** — required for Stages 3–4 and all MIP baselines.
-  `gurobipy` must be importable. Academic licences are available free from gurobi.com.
+- Python 3.9 or newer.
+- `numpy`, `pandas`, and `matplotlib`.
+- Gurobi with a valid license. The scripts require `gurobipy` to be importable.
 
-Install Python dependencies:
+Install Python dependencies with:
+
 ```bash
 pip install -r requirements.txt
 ```
 
----
+`gurobipy` is listed separately because it is normally installed through the
+Gurobi installer or license-managed Python environment.
 
-## Reproducing the paper results
+## Reproducing the Paper Results
 
-All experiments in the paper can be reproduced with a single command:
+Run the full reproduction suite:
 
 ```bash
 python reproduce_paper.py
 ```
 
-This runs five experiment scripts in sequence (~30 min on a modern laptop, single thread):
+Estimated runtime on a modern laptop, single-threaded, is about 65 minutes.
 
-| Experiment | Script | Paper table | ~Time |
-|---|---|---|---|
-| LP baselines (§3.1/3.2) | `run_lp_baselines.py` | tab:popsyn_lp, tab:transport_lp | 2 min |
-| Stage-contribution ablation (§3.3) | `run_ablation_setcover.py` | tab:ablation | 8 min |
-| OR-Library benchmarks (§3.3) | `run_orlib_scp.py` | tab:orlib | 1 min |
-| MIPFocus=1 comparison (§3.3) | `run_mipfocus_comparison.py` | (response letter) | 5 min |
-| Extended warm-start (§3.3.3) | `run_warmstart_extended.py` | tab:hybrid_vs_mip | 15 min |
+| Key | Experiment | Script | Main output | Approx. time |
+|---|---|---|---|---|
+| `lp_baselines` | LP baselines for Sections 3.1 and 3.2 | `run_lp_baselines.py` | `experiments/lp_baselines/` | 2 min |
+| `anytime` | Large set-cover anytime trajectories | `run_anytime_comprehensive.py` | Figures 1 and 2, CSV trace | 35 min |
+| `ablation` | Stage 1-2 / 1-3 / 1-4 ablation | `run_ablation_setcover.py` | `Table35.tex`, summary | 8 min |
+| `orlib` | OR-Library scp41-scp49 benchmarks | `run_orlib_scp.py` | `Table36.tex`, summary | 1 min |
+| `mipfocus` | Gurobi default and `MIPFocus=1` comparison | `run_mipfocus_comparison.py` | response-letter summary | 5 min |
+| `warmstart` | Extended warm-start experiment | `run_warmstart_extended.py` | `Table37.tex`, summary | 15 min |
 
-Each script can also be run individually:
+Select or skip experiments with:
+
 ```bash
-python run_ablation_setcover.py
-python run_orlib_scp.py
-# etc.
+python reproduce_paper.py --only anytime
+python reproduce_paper.py --only ablation orlib
+python reproduce_paper.py --skip anytime warmstart
 ```
 
-Output CSVs and summary TXT files are written to `experiments/<name>/` with a
-timestamp in the filename.
+For a quick smoke test of the longest experiment:
 
-### OR-Library data
-
-The OR-Library set-cover instances (scp41–scp49) must be present in `data/orlib_scp/`.
-Download from:
+```bash
+python run_anytime_comprehensive.py --trials 2
 ```
+
+## Outputs
+
+Raw CSV files and text summaries are written under `experiments/<name>/`.
+Generated paper artifacts are written to `paper_artifacts/`:
+
+- `time_quality_figure.png` and `.svg`
+- `time_advantage_figure.png` and `.svg`
+- `Table35.tex`
+- `Table36.tex`
+- `Table37.tex`
+
+The repository also includes selected summary TXT files from the final runs so
+reviewers can inspect representative outputs without rerunning every experiment.
+Large raw CSV outputs are ignored by Git.
+
+## OR-Library Data
+
+The OR-Library set-cover files `scp41.txt` through `scp49.txt` are required for
+the OR-Library experiment. Download them from:
+
+```text
 https://people.brunel.ac.uk/~mastjjb/jeb/orlib/scpinfo.html
 ```
-Place the files as `data/orlib_scp/scp41.txt` … `scp49.txt`.
-The `reproduce_paper.py` script will check for these and skip the OR-Library
-experiment with a warning if they are missing.
 
----
+Place them in:
 
-## Repository structure
-
+```text
+data/orlib_scp/
 ```
-reproduce_paper.py          # Master runner — reproduces all paper results
-run_lp_baselines.py         # §3.1/3.2: LP baseline comparison
-run_ablation_setcover.py    # §3.3.2: Stage 1-2 / 1-3 / 1-4 ablation
-run_orlib_scp.py            # §3.3.2: OR-Library scp41-scp49 benchmarks
-run_mipfocus_comparison.py  # §3.3.2: Gurobi MIPFocus=1 comparison
-run_warmstart_extended.py   # §3.3.3: Extended warm-start (120s, dual bounds)
+
+If these files are missing, `reproduce_paper.py` skips the OR-Library
+experiment with a warning and continues with the remaining experiments.
+
+## Repository Structure
+
+```text
+reproduce_paper.py             Master runner for the full reproduction suite
+make_figures_comprehensive.py  Builds Figures 1 and 2 from anytime CSV output
+
+run_lp_baselines.py            LP baselines for population and transport cases
+run_anytime_comprehensive.py   Large set-cover anytime trajectories
+run_ablation_setcover.py       Four-stage ablation for set cover
+run_orlib_scp.py               OR-Library scp41-scp49 benchmarks
+run_mipfocus_comparison.py     Gurobi default versus MIPFocus=1 comparison
+run_warmstart_extended.py      Extended warm-start analysis
 
 mip_hybrid/
   apps/
-    synth_setcover.py       # Core set-cover solver (Stages 1-4)
-    population_transport.py # Population synthesis and transportation solvers
-  analysis/                 # Table generation utilities
-  runners/                  # Legacy runners for original paper tables
-  core/, io/                # Supporting modules
+    synth_setcover.py          Core set-cover implementation, Stages 1-4
+    population_transport.py    Population synthesis and transport examples
+    rail_setcover.py           Rail set-cover application code
+  runners/                     Legacy application runners retained for context
+  io/                          Output helpers
+  core/                        Package namespace
 
 data/
-  orlib_scp/                # Place OR-Library .txt files here
-experiments/
-  ablation/                 # Output from run_ablation_setcover.py
-  lp_baselines/             # Output from run_lp_baselines.py
-  orlib_scp/                # Output from run_orlib_scp.py
-  mipfocus/                 # Output from run_mipfocus_comparison.py
-  warmstart_extended/       # Output from run_warmstart_extended.py
+  orlib_scp/                   OR-Library files, downloaded separately
+
+experiments/                   Generated results and selected final summaries
+paper_artifacts/               Generated figures and LaTeX table bodies
 ```
 
----
+## Fixed Parameters
 
-## Skipping or selecting experiments
+The reproduction scripts use the settings reported in the revised paper:
 
-```bash
-# Run only the ablation and OR-Library experiments
-python reproduce_paper.py --only ablation orlib
-
-# Run everything except the warm-start (longest experiment)
-python reproduce_paper.py --skip warmstart
-```
-
----
-
-## Key parameters
-
-All experiment scripts use the parameter settings reported in the paper:
-
-| Parameter | Value | Role |
-|---|---|---|
-| Temperature schedule | τ ∈ {0.5, 0.2, 0.1} | Annealing stages |
-| IPF sweeps | 50 per stage | Convergence |
-| Restricted MIP budget | 1s | Stage 3 polish time |
-| Pool size | top 30% | Stage 3 variable pool |
-| MH steps | 150 | Stage 4 iterations |
-| MH temperature | 0.1 | Stage 4 acceptance |
-| Threads | 1 | Single-threaded throughout |
-
----
+| Parameter | Value |
+|---|---|
+| Temperature schedule | `0.5, 0.2, 0.1` |
+| IPF sweeps | 50 to 60 per annealing stage, depending on experiment |
+| Restricted-MIP budget | 1 second |
+| Restricted-MIP pool | top 30 percent of variables |
+| MH polish steps | 150 |
+| MH temperature | 0.1 |
+| Gurobi threads | 1 |
+| Long Gurobi comparison budget | 30 or 120 seconds, depending on experiment |
 
 ## Citation
 
 If you use this code, please cite:
 
-```
-Rich, J. (2025). RICH: A Rapid Information-Theoretic Hybrid Algorithm for
-Mixed-Integer Optimization. Mathematical Programming Computation (under review).
+```text
+Rich, J. (2026). RICH: A Rapid Information-Theoretic Hybrid Algorithm for
+Mixed-Integer Optimization. Mathematical Programming Computation, under review.
 ```

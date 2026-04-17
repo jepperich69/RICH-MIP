@@ -28,7 +28,7 @@ import numpy as np
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OVERLEAF_DIR = Path(HERE).parents[2] / "Overleaf_source"
+OVERLEAF_DIR = Path(HERE) / "paper_artifacts"
 sys.path.insert(0, HERE)
 
 from mip_hybrid.apps.synth_setcover import (
@@ -153,7 +153,7 @@ def _fmt(val, fmt=".1f", fallback="---"):
 
 # ── tex writer ────────────────────────────────────────────────────────────────
 def write_table37_tex(df, overleaf_dir=OVERLEAF_DIR):
-    """Write Table37.tex (tabular body for tab:hybrid_vs_mip) to Overleaf_source/."""
+    """Write Table37.tex (tabular body for tab:hybrid_vs_mip) to paper_artifacts/."""
     overleaf_dir = Path(overleaf_dir)
     overleaf_dir.mkdir(parents=True, exist_ok=True)
 

@@ -33,6 +33,7 @@ Thumbs.db
 
 # Build artefacts and large binaries
 output/
+paper_artifacts/
 *.zip
 *.pdf
 *.pkl

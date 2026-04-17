@@ -4,7 +4,7 @@ reproduce_paper.py
 Master runner that reproduces all experimental results reported in:
 
   RICH: A Rapid Information-Theoretic Hybrid Algorithm for Mixed-Integer
-  Optimization (Mathematical Programming Computation, R1B revision)
+  Optimization (Mathematical Programming Computation, R1C revision)
 
 Runs the following experiments in order:
 
@@ -12,7 +12,7 @@ Runs the following experiments in order:
     -> run_lp_baselines.py
 
   Section 3.3.1 -- Anytime trajectories, Figures 1 & 2
-    -> run_anytime_comprehensive.py   (also generates figures → Overleaf_source/)
+    -> run_anytime_comprehensive.py   (also generates figures -> paper_artifacts/)
 
   Section 3.3.2 -- Stage-contribution ablation (Table tab:ablation → Table35.tex)
     -> run_ablation_setcover.py
@@ -38,10 +38,10 @@ Estimated runtime (single-threaded, modern laptop)
 ---------------------------------------------------
   LP baselines          ~  2 min
   Anytime (20 trials)   ~ 35 min  (also generates Figures 1 & 2)
-  Ablation (5 trials)   ~  8 min  (writes Table35.tex → Overleaf_source/)
-  OR-Library (9 inst)   ~  1 min  (writes Table36.tex → Overleaf_source/)
+  Ablation (5 trials)   ~  8 min  (writes Table35.tex -> paper_artifacts/)
+  OR-Library (9 inst)   ~  1 min  (writes Table36.tex -> paper_artifacts/)
   MIPFocus comparison   ~  5 min
-  Warm-start extended   ~ 15 min  (writes Table37.tex → Overleaf_source/)
+  Warm-start extended   ~ 15 min  (writes Table37.tex -> paper_artifacts/)
   ---------------------------------
   Total                 ~ 65 min
 
@@ -54,9 +54,9 @@ Usage
 Output
 ------
   CSV / TXT results  → experiments/<name>/
-  LaTeX table bodies → Overleaf_source/Table35.tex, Table36.tex, Table37.tex
-  Figures            → Overleaf_source/time_quality_figure.{png,svg}
-                       Overleaf_source/time_advantage_figure.{png,svg}
+  LaTeX table bodies -> paper_artifacts/Table35.tex, Table36.tex, Table37.tex
+  Figures            -> paper_artifacts/time_quality_figure.{png,svg}
+                        paper_artifacts/time_advantage_figure.{png,svg}
 """
 
 import argparse
@@ -77,17 +77,17 @@ EXPERIMENTS = [
     {
         "key":    "anytime",
         "module": "run_anytime_comprehensive",
-        "label":  "§3.3.1    Anytime trajectories + Figures 1 & 2 (→ Overleaf_source/)",
+        "label":  "§3.3.1    Anytime trajectories + Figures 1 & 2 (-> paper_artifacts/)",
     },
     {
         "key":    "ablation",
         "module": "run_ablation_setcover",
-        "label":  "§3.3.2    Stage-contribution ablation (Table35.tex → Overleaf_source/)",
+        "label":  "§3.3.2    Stage-contribution ablation (Table35.tex -> paper_artifacts/)",
     },
     {
         "key":    "orlib",
         "module": "run_orlib_scp",
-        "label":  "§3.3.2    OR-Library benchmarks scp41-scp49 (Table36.tex → Overleaf_source/)",
+        "label":  "§3.3.2    OR-Library benchmarks scp41-scp49 (Table36.tex -> paper_artifacts/)",
     },
     {
         "key":    "mipfocus",
@@ -97,7 +97,7 @@ EXPERIMENTS = [
     {
         "key":    "warmstart",
         "module": "run_warmstart_extended",
-        "label":  "§3.3.3    Extended warm-start analysis (Table37.tex → Overleaf_source/)",
+        "label":  "§3.3.3    Extended warm-start analysis (Table37.tex -> paper_artifacts/)",
     },
 ]
 
