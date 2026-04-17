@@ -128,9 +128,15 @@ def envelope(by_trial):
     for i, vals in enumerate(by_trial.values()):
         matrix[i, :] = vals
 
-    med = np.nanmedian(matrix, axis=0)
-    q25 = np.nanpercentile(matrix, 25, axis=0)
-    q75 = np.nanpercentile(matrix, 75, axis=0)
+    med = np.full(n_cp, np.nan)
+    q25 = np.full(n_cp, np.nan)
+    q75 = np.full(n_cp, np.nan)
+    for j in range(n_cp):
+        finite = matrix[:, j][np.isfinite(matrix[:, j])]
+        if finite.size:
+            med[j] = np.median(finite)
+            q25[j] = np.percentile(finite, 25)
+            q75[j] = np.percentile(finite, 75)
     return med, q25, q75, matrix
 
 
