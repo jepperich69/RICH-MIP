@@ -39,4 +39,4 @@ paper_artifacts/
 *.pkl
 
 # Local archive (preserved history is in git log)
-_archive_20260416/
+_archive*/

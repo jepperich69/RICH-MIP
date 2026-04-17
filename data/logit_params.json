@@ -1,8 +1,0 @@
-{
-  "alpha_fare": 0.015,
-  "alpha_time": 0.8,
-  "alpha_wait": 1.2,
-  "alpha_connect": 0.5,
-  "tau": 0.3,
-  "value_of_time": 25.0
-}

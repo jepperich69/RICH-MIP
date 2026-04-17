@@ -9,8 +9,10 @@ optimization.
 ## What This Repository Reproduces
 
 This repository contains the final R1C reproduction code for the paper. The
-main entry point is `reproduce_paper.py`, which runs the numerical examples and
-reviewer-response experiments used in the revised manuscript:
+repository root is the reproduction suite itself; older exploratory code has
+been archived outside the tracked public tree. The main entry point is
+`reproduce_paper.py`, which runs the numerical examples and reviewer-response
+experiments used in the revised manuscript:
 
 - LP relaxations for the population synthesis and transportation examples.
 - New anytime trajectory experiment for the large set-cover example, including
@@ -133,9 +135,6 @@ mip_hybrid/
   apps/
     synth_setcover.py          Core set-cover implementation, Stages 1-4
     population_transport.py    Population synthesis and transport examples
-    rail_setcover.py           Rail set-cover application code
-  runners/                     Legacy application runners retained for context
-  io/                          Output helpers
   core/                        Package namespace
 
 data/

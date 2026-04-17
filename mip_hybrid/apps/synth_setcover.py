@@ -1,4 +1,4 @@
-# mip_hybrid/apps/synth_setcover.py - Fixed version using entropy framework
+# mip_hybrid/apps/synth_setcover.py
 import argparse, os, time
 import numpy as np
 import pandas as pd
@@ -80,11 +80,11 @@ def _build_instance_from_matrix(A_matrix, c):
     
     return inst
 
-# ======= Port the entropy framework from rail_setcover.py =======
+# ======= Entropy relaxation and rounding core =======
 
 def ipf_rowwise_entropy(inst: SetCoverInstance, tau: float, iters: int, tol: float):
     """
-    Row-wise IPF entropy relaxation - simplified version from rail_setcover.py
+    Row-wise IPF entropy relaxation for set cover.
     """
     t0 = time.time()
     q = np.exp(-inst.c / max(tau, 1e-12))
@@ -127,7 +127,7 @@ def entropy_relax_with_annealing(inst: SetCoverInstance, tau: float = 0.1,
                                 iters: int = 50, tol: float = 1e-3,
                                 tau_schedule: Optional[List[float]] = None):
     """
-    Run IPF with tau annealing - simplified from rail_setcover.py
+    Run IPF with tau annealing.
     """
     taus = tau_schedule if tau_schedule else [tau]
     x = None
@@ -171,7 +171,7 @@ def compute_reduced_costs(inst: SetCoverInstance, y: np.ndarray):
 
 def round_cover_dual_guided(inst: SetCoverInstance, x_frac: np.ndarray, y: np.ndarray):
     """
-    Dual-guided rounding - simplified from rail_setcover.py
+    Dual-guided rounding.
     """
     n, m, k = inst.n, inst.m, inst.k
     r = compute_reduced_costs(inst, y)
@@ -821,11 +821,7 @@ def run_family(scales, trials, out_path, tau=0.1, density=0.002, seed=42,
     print(f"[synth] wrote {out_path} rows={len(df)} wall={time.time()-t0:.2f}s")
     return df
 
-"""
-Warm Start Experiments: Use Hybrid solution to initialize Gurobi
-
-Add this to your synth_setcover.py or rail_setcover.py
-"""
+"""Warm-start experiments: use the RICH solution to initialize Gurobi."""
 import numpy as np
 import time
 
