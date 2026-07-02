@@ -48,9 +48,9 @@ import pandas as pd
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-from mip_hybrid.apps.synth_setcover import (
-    _gen_entropy_friendly_scp,
-    _build_instance_from_matrix,
+from jr_optlib.setcover.entropy import (
+    gen_entropy_friendly_scp as _gen_entropy_friendly_scp,
+    build_instance_from_matrix as _build_instance_from_matrix,
     solve_entropy_setcover,
 )
 

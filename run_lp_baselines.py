@@ -27,10 +27,8 @@ import pandas as pd
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
-from mip_hybrid.apps.population_transport import (
-    make_contingency2d, ipf_2d,
-    make_transport, sinkhorn_balanced_uv,
-)
+from jr_optlib.transport.ipf import make_contingency2d, ipf_2d
+from jr_optlib.transport.sinkhorn import make_transport, sinkhorn_balanced_uv
 
 OUT_DIR = os.path.join(HERE, "experiments", "lp_baselines")
 

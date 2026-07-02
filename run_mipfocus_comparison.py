@@ -25,8 +25,8 @@ import pandas as pd
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
-from mip_hybrid.apps.synth_setcover import (
-    _gen_entropy_friendly_scp,
+from jr_optlib.setcover.entropy import (
+    gen_entropy_friendly_scp as _gen_entropy_friendly_scp,
     solve_entropy_setcover,
 )
 

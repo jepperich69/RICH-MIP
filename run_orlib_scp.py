@@ -22,7 +22,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OVERLEAF_DIR = Path(HERE) / "paper_artifacts"
 sys.path.insert(0, HERE)
 
-from mip_hybrid.apps.synth_setcover import solve_entropy_setcover
+from jr_optlib.setcover.entropy import solve_entropy_setcover
 
 # ── known optima (Beasley 1987) ───────────────────────────────────────────────
 KNOWN_OPT = {

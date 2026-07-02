@@ -21,14 +21,10 @@ import sys, os, time, datetime
 from pathlib import Path
 import numpy as np
 import pandas as pd
-
-# ── path setup ────────────────────────────────────────────────────────────────
-HERE = os.path.dirname(os.path.abspath(__file__))
-OVERLEAF_DIR = Path(HERE) / "paper_artifacts"
 sys.path.insert(0, HERE)
 
-from mip_hybrid.apps.synth_setcover import (
-    _gen_entropy_friendly_scp,
+from jr_optlib.setcover.entropy import (
+    gen_entropy_friendly_scp as _gen_entropy_friendly_scp,
     solve_entropy_setcover,
     solve_mip,
 )
